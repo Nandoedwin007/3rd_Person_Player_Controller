@@ -399,6 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   RotationSpeed: 240
+  jumpForce: 10
 --- !u!143 &1037772164
 CharacterController:
   m_ObjectHideFlags: 0

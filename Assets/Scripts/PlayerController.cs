@@ -15,11 +15,16 @@ public class PlayerController : MonoBehaviour
 
     public float Speed = 5.0f;
 
+
     public float RotationSpeed = 240.0f;
 
-    private float Gravity = 20.0f;
+    private float Gravity = 10.0f;
+
+    public float jumpForce = 5.0f;
 
     private Vector3 _moveDir = Vector3.zero;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,11 @@ public class PlayerController : MonoBehaviour
         //Get Input 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+
+        //if(_characterController.isGrounded && Input.GetButtonDown("Jump"))
+        //{
+        //    playerJump();
+        //}
 
         //Limit forward movement
 
@@ -57,7 +67,28 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (_characterController.isGrounded)
+        {
+            if (Input.GetButton("Jump"))
+            {
+                _animator.SetBool("is_in_air", true);
+                _moveDir.y = jumpForce;
+            }
+            else
+            {
+                _animator.SetBool("is_in_air", false);
+                _animator.SetBool("run", _moveDir.magnitude > 0);
+            }
+        }
+
         _moveDir.y -= Gravity*Time.deltaTime;
+
+        _characterController.Move(_moveDir * Time.deltaTime);
+    }
+
+    public void playerJump()
+    {
+        _moveDir.y = jumpForce;
 
         _characterController.Move(_moveDir * Time.deltaTime);
     }
