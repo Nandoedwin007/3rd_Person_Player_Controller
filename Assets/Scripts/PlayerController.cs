@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
 
     public float RotationSpeed = 240.0f;
 
-    private float Gravity = 10.0f;
+    private float Gravity = 10f;
 
-    public float jumpForce = 5.0f;
+    public float jumpForce = 6f;
 
     private Vector3 _moveDir = Vector3.zero;
 
